@@ -99,7 +99,7 @@ const generatedBaseClasses = computed(() => ({
 	"is-inline": props.inline,
 	"is-disabled": props.disabled,
 	"is-readonly": props.readonly,
-	"is-active": currentStep.value !== props.step ? true : false,
+	"is-active": currentStep.value === props.step ? true : false,
 }));
 
 /* **************************************************
