@@ -32,18 +32,126 @@
     height: 0;
     max-height: 0;
     border: solid;
-    border-top-color: currentcolor;
-    border-top-width: medium;
-    border-right-color: currentcolor;
-    border-right-width: medium;
-    border-bottom-color: currentcolor;
-    border-bottom-width: medium;
-    border-left-color: currentcolor;
-    border-left-width: medium;
     border-width: thin 0 0 0;
     margin-top: 25px;
-    margin-left: 1em;
-    margin-right: 1em;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+  }
+
+  // Button reset
+  &--button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+  
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none;
+    &::-moz-focus-inner {
+      border: 0;
+      padding: 0;
+    }
+  }
+
+  &--button {
+		position: relative;
+		padding: 0.5em 1em;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		flex-flow: column;
+
+		label {
+			pointer-events: none;
+			margin-top: 0.5em;
+		}
+
+		&.is-inline {
+			flex-flow: row;
+		}
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			pointer-events: none;
+			background-color: currentColor;
+			opacity: 0;
+			transition: opacity 300ms ease-in-out;
+			border-radius: 4px;
+		}
+
+		&:hover::before {
+			opacity: 0.17;
+		}
+
+		&:active::before {
+			opacity: 0.4;
+		}
+	}
+
+  &--item {
+		&.is-inline.has-icon label {
+			margin-left: 1em;
+		}
+
+    &.is-inline {
+      .vue3-steps__header--button {
+        flex-flow: row;
+      }
+    }
+
+		&.is-inline label {
+			margin-top: 0;
+		}
+
+		&.is-disabled,
+		&.is-readonly:not(.is-active) {
+			.vue3-steps__header--button {
+				pointer-events: none;
+				opacity: 0.4;
+				filter: grayscale(1);
+			}
+		}
+
+    &.is-readonly {
+      pointer-events: none;
+    }
+
+    &.has-error {
+      color: #ff5252 !important;
+      caret-color: #ff5252 !important;
+
+      .vue3-steps__header--step {
+        background-color: transparent;
+        color: inherit;
+      }
+    }
+	}
+
+  &--step {
+		height: 35px;
+		width: 35px;
+		background-color: steelblue;
+		color: white;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 50%;
+	}
+
+  &--error-message {
+    font-size: 85%;
   }
 }
 
@@ -68,7 +176,7 @@
   &-right {
     &-enter-active,
     &-leave-active {
-      transition: transform 500ms ease-in-out;
+      transition: transform var(--step-transition-duration) var(--step-transition-timing-function);
     }
   }
 }

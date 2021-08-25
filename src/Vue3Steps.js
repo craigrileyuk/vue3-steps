@@ -1,4 +1,4 @@
-import { ref, h, provide, watch, Transition } from "vue";
+import { ref, h, provide, watch, Transition, computed } from "vue";
 import "./style.scss";
 
 const generateHeaderComponents = (props, slots) => {
@@ -8,7 +8,7 @@ const generateHeaderComponents = (props, slots) => {
   return h(
     "header",
     {
-      class: ["vue3-steps__header--container"],
+      class: ["vue3-steps__header--container", props.headerClass],
     },
     [
       slots.header().map((header, idx, arr) => {
@@ -46,7 +46,7 @@ const generateContentComponents = (
     }
   );
 
-  return h("div", { class: "vue3-steps__content--container" }, [
+  return h("div", { class: ["vue3-steps__content--container", props.contentClass] }, [
     transitionNode,
   ]);
 };
@@ -61,6 +61,22 @@ export default {
       type: [String, Number],
       default: 1,
     },
+    contentClass: {
+      type: String,
+      default: ""
+    },
+    headerClass: {
+      type: String,
+      default: ""
+    },
+    transitionDuration: {
+      type: [String, Number],
+      default: "500ms"
+    },
+    transitionTimingFunction: {
+      type: String,
+      default: "ease-in-out"
+    }
   },
   setup(props, { slots, emit }) {
     const currentStep = ref(props.modelValue);
@@ -70,6 +86,10 @@ export default {
     };
     provide("changeStep", onChangeStep);
     provide("currentStep", currentStep);
+
+    const duration = computed(() => {
+      return typeof props.transitionDuration === 'number' ? props.transitionDuration + "ms" : props.transitionDuration
+    })
 
     watch(currentStep, (newValue, oldValue) => {
       slideDirection.value = newValue > oldValue ? "left" : "right";
@@ -86,6 +106,10 @@ export default {
       h(
         "div",
         {
+          style: {
+            '--step-transition-duration': duration.value,
+            '--step-transition-timing-function': props.transitionTimingFunction
+          },
           class: [
             "vue3-steps__steps",
             {
