@@ -1,5 +1,5 @@
 <template>
-  <Vue3Steps v-model="step">
+  <Vue3Steps v-model="step" style="width: 500px">
     <template #header>
       <Vue3StepHeader :icon="mdiAccount" :step="1">One</Vue3StepHeader>
       <Vue3StepHeader :icon="mdiAnimation" :step="2">Two</Vue3StepHeader>

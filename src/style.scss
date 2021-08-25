@@ -1,4 +1,6 @@
 .vue3-steps__steps {
+  overflow: hidden;
+
   &.is-vertical {
     .vue3-steps__header--container {
       display: flex;
@@ -48,35 +50,25 @@
 .step-slide {
   &-left {
     &-enter-from {
-      opacity: 0;
+      transform: translateX(100%);
     }
     &-leave-to {
-      opacity: 0;
+      transform: translateX(-100%);
     }
   }
   &-right {
     &-enter-from {
-      opacity: 0;
+      transform: translateX(-100%);
     }
     &-leave-to {
-      opacity: 0;
+      transform: translateX(100%);
     }
   }
   &-left,
   &-right {
     &-enter-active,
     &-leave-active {
-      transition: opacity 5000ms ease-in-out;
+      transition: transform 500ms ease-in-out;
     }
   }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 2000ms ease-in-out;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }

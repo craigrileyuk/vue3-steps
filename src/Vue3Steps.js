@@ -30,23 +30,25 @@ const generateContentComponents = (
     Transition,
     {
       mode: "out-in",
-      name: "fade",
+      name: "step-slide-" + slideDirection.value,
     },
     {
       default() {
-        const active = slots
-          .default()
-          .find((content) => content.props.step === currentStep.value);
+        const content = slots.default();
+        content.forEach((c) => (c.key = c.props.step));
+
+        const active = content.find(
+          (content) => content.props.step === currentStep.value
+        );
+
         return active;
       },
     }
   );
 
-  const container = h("div", { class: "vue3-steps__content--container" }, [
+  return h("div", { class: "vue3-steps__content--container" }, [
     transitionNode,
   ]);
-
-  return container;
 };
 
 export default {

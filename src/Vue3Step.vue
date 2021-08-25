@@ -1,5 +1,5 @@
 <template>
-  <div class="vue3-steps__content--item" :key="props.step">
+  <div class="vue3-steps__content--item">
     <slot></slot>
   </div>
 </template>
