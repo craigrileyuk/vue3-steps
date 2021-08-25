@@ -46,8 +46,12 @@ const generateContentComponents = (
     }
   );
 
+  const inner = h("div", {
+    class: "vue3-steps__content--container-inner"
+  }, [transitionNode])
+
   return h("div", { class: ["vue3-steps__content--container", props.contentClass] }, [
-    transitionNode,
+    inner,
   ]);
 };
 

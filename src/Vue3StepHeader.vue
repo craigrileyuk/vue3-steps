@@ -6,7 +6,6 @@
 	>
 		<button
 			class="vue3-steps__header--button"
-			:class="generatedButtonClasses"
 			@click="changeStep(props.step)"
 		>
 			<div class="vue3-steps__header--step">
@@ -72,6 +71,14 @@ const props = defineProps({
 		type: String,
 		default: "",
 	},
+  badgeBackground: {
+    type: String,
+    default: "steelblue"
+  },  
+  badgeColor: {
+    type: String,
+    default: "#fff"
+  }
 });
 
 /* **************************************************
@@ -99,7 +106,7 @@ const generatedBaseClasses = computed(() => ({
  * BASE STYLES
  ************************************************** */
 const generatedBaseStyles = computed(() => ({
-	"--button": props.inline,
+	"--steps-badge-color": props.badgeColor,
+  "--steps-badge-background": props.badgeBackground
 }));
-const generatedButtonClasses = computed(() => ({}));
 </script>

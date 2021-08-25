@@ -1,5 +1,4 @@
 .vue3-steps__steps {
-  overflow: hidden;
 
   &.is-vertical {
     .vue3-steps__header--container {
@@ -23,6 +22,7 @@
 .vue3-steps__header {
   &--container {
     display: flex;
+    padding: 0.5em;
   }
 
   &--divider {
@@ -109,11 +109,13 @@
       .vue3-steps__header--button {
         flex-flow: row;
       }
+      .vue3-steps__header--step {
+        margin-bottom: 0;
+      }
+      label {
+        margin-top: 0;
+      }
     }
-
-		&.is-inline label {
-			margin-top: 0;
-		}
 
 		&.is-disabled,
 		&.is-readonly:not(.is-active) {
@@ -142,12 +144,13 @@
   &--step {
 		height: 35px;
 		width: 35px;
-		background-color: steelblue;
-		color: white;
+		background-color: var(--steps-badge-background);
+		color: var(--steps-badge-color);
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		border-radius: 50%;
+    margin-bottom: 0.5em;
 	}
 
   &--error-message {
@@ -155,28 +158,44 @@
   }
 }
 
+.vue3-steps__content {
+  &--container {
+    padding: 1.5em;
+  }
+ &--container-inner {
+  overflow: hidden;
+ }
+}
+
 .step-slide {
   &-left {
     &-enter-from {
-      transform: translateX(100%);
+      transform: translateX(100%) translateZ(0);
     }
     &-leave-to {
-      transform: translateX(-100%);
+      transform: translateX(-100%) translateZ(0);
     }
   }
   &-right {
     &-enter-from {
-      transform: translateX(-100%);
+      transform: translateX(-100%) translateZ(0);
     }
     &-leave-to {
-      transform: translateX(100%);
+      transform: translateX(100%) translateZ(0);
     }
   }
   &-left,
   &-right {
     &-enter-active,
     &-leave-active {
-      transition: transform var(--step-transition-duration) var(--step-transition-timing-function);
+      transition-property: opacity, transform;
+      transition-duration: var(--step-transition-duration);
+      transition-timing-function: var(--step-transition-timing-function);
+      will-change: transform;
+    }
+    &-enter-from,
+    &-leave-to {
+      opacity: 1;
     }
   }
 }
